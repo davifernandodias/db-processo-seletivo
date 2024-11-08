@@ -1,27 +1,31 @@
-const jsonServer = require('json-server');
-const cors = require('cors');  // Importando o pacote CORS
+// See https://github.com/typicode/json-server#module
+const jsonServer = require('json-server')
 
-const server = jsonServer.create();
+const server = jsonServer.create()
 
-// Usando o middleware CORS para permitir requisições do frontend Angular
-server.use(cors({
-    origin: '*', // Permitir todas as origens, ou coloque o URL específico do frontend
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Métodos permitidos
-}));
+// Uncomment to allow write operations
+// const fs = require('fs')
+// const path = require('path')
+// const filePath = path.join('db.json')
+// const data = fs.readFileSync(filePath, "utf-8");
+// const db = JSON.parse(data);
+// const router = jsonServer.router(db)
 
-// Configuração do json-server
-const router = jsonServer.router('db.json');
-const middlewares = jsonServer.defaults();
+// Comment out to allow write operations
+const router = jsonServer.router('db.json')
 
-server.use(middlewares);
+const middlewares = jsonServer.defaults()
+
+server.use(middlewares)
+// Add this before server.use(router)
 server.use(jsonServer.rewriter({
-    '/api/*': '/$1', // Essa reescrita pode não ser necessária se os seus endpoints estiverem corretos
-    '/blog/:resource/:id/show': '/:resource/:id'  // Verifique se isso é realmente necessário
-}));
-server.use(router);
-
+    '/api/*': '/$1',
+    '/blog/:resource/:id/show': '/:resource/:id'
+}))
+server.use(router)
 server.listen(3000, () => {
-    console.log('JSON Server is running');
-});
+    console.log('JSON Server is running')
+})
 
-module.exports = server;
+// Export the Server API
+module.exports = server
