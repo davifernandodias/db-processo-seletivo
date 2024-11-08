@@ -4,10 +4,11 @@ const cors = require('cors'); // Importando o middleware CORS
 const server = jsonServer.create()
 
 server.use(cors({
-  origin: 'https://to-do-list-task-processo-seletivo-cod511qja.vercel.app', // Front-end
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
-  allowedHeaders: ['Content-Type'], // Cabeçalhos permitidos
+  origin: '*', // Permite qualquer origem durante o desenvolvimento
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type'],
 }));
+
 
 
 const router = jsonServer.router('db.json')
