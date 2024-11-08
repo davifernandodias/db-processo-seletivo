@@ -5,7 +5,7 @@ const server = jsonServer.create();
 
 // Usando o middleware CORS para permitir requisições do frontend Angular
 server.use(cors({
-  origin: 'https://to-do-list-task-processo-seletivo.vercel.app', // Substitua com o URL do seu frontend
+  origin: 'https://db-processo-seletivo-task-processo-dfc.vercel.app/tasks', // Substitua com o URL do seu frontend
   methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Métodos permitidos
 }));
 
