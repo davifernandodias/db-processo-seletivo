@@ -22,13 +22,15 @@ Demo from this repository:
 
 ```json
 {
-  "posts": [
-    { "id": 1, "title": "json-server", "author": "typicode" }
-  ],
-  "comments": [
-    { "id": 1, "body": "some comment", "postId": 1 }
-  ],
-  "profile": { "name": "typicode" }
+  "tasks": [
+    {
+      "id": "8242",
+      "tarefaNome": "tarefa teste",
+      "valor": 1000,
+      "dataMaxima": "2024-08-11",
+      "serialOrdernacao": 0
+    }
+  ]
 }
 ```
 
