@@ -11,6 +11,8 @@ server.use(cors({
 
 
 
+
+
 const router = jsonServer.router('db.json')
 const middlewares = jsonServer.defaults()
 
