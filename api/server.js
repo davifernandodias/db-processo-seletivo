@@ -1,31 +1,27 @@
-// See https://github.com/typicode/json-server#module
-const jsonServer = require('json-server')
+const jsonServer = require('json-server');
+const cors = require('cors');  // Importando o pacote CORS
 
-const server = jsonServer.create()
+const server = jsonServer.create();
 
-// Uncomment to allow write operations
-// const fs = require('fs')
-// const path = require('path')
-// const filePath = path.join('db.json')
-// const data = fs.readFileSync(filePath, "utf-8");
-// const db = JSON.parse(data);
-// const router = jsonServer.router(db)
+// Usando o middleware CORS para permitir requisições do frontend Angular
+server.use(cors({
+    origin: 'https://seu-frontend-angular.vercel.app', // Substitua com o URL do seu frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Métodos permitidos
+}));
 
-// Comment out to allow write operations
-const router = jsonServer.router('db.json')
+// Configuração do json-server
+const router = jsonServer.router('db.json');
+const middlewares = jsonServer.defaults();
 
-const middlewares = jsonServer.defaults()
-
-server.use(middlewares)
-// Add this before server.use(router)
+server.use(middlewares);
 server.use(jsonServer.rewriter({
     '/api/*': '/$1',
     '/blog/:resource/:id/show': '/:resource/:id'
-}))
-server.use(router)
-server.listen(3000, () => {
-    console.log('JSON Server is running')
-})
+}));
+server.use(router);
 
-// Export the Server API
-module.exports = server
+server.listen(3000, () => {
+    console.log('JSON Server is running');
+});
+
+module.exports = server;
